@@ -1,0 +1,602 @@
+﻿﻿
+@section Styles
+	{
+
+}
+﻿
+<h1>Kitap Listesi</h1>
+<div>
+	<div class="card">
+		<div class="card-header  text-white bg-success bg-gradient">
+			Kitap Listesi
+
+			<a href="#" id="btnEkle" class="btn btn-warning ml-4">Ekle</a>
+		</div>
+		<div class="card-body" style="overflow:auto">
+			<table id="tblBook" class="table table-bordered table-striped" style="width:100%">
+			@*	<thead>*@
+					@*<tr>*@
+						@*<th>Guid</th>*@
+					@*	<th>Kitap Adı</th>
+						<th>Açıklama</th>
+						<th>ISBN</th>
+						<th>Fiyat</th>
+						<th>Sayfa Sayısı</th>
+						<th>Kategori</th>
+						<th>Yazarlar</th>
+						<th>Yayınevleri</th>
+						<th>Oluşturulma Tarihi</th>
+						<th>İşlemler</th>*@
+					</tr>
+			@*	</thead>*@
+
+			</table>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTitleId">Kitap Ekle </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+
+					<div class="mb-3">
+						<label class="form-label">Kategori</label>
+						<select id="ddlCategory" @*multiple="multiple"*@ class="form-control select2">
+							@*<option value="1">Ebru</option>
+							<option value="2">Ebru2</option>*@
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Yazarlar</label>
+						<select id="ddlAuthor" multiple="multiple" class="form-control select2">
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Yayınevleri</label>
+						<select id="ddlPublisher" multiple="multiple" class="form-control select2">
+						</select>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Kitap Adı</label>
+						<input type="text" id="txtName" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Kitap Açıklaması</label>
+						<textarea id="txtDescription" class="form-control txt"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Fiyat</label>
+						<input type="text" id="txtPrice" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Sayfa Sayısı</label>
+						<input type="text" id="txtTotalPages" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">ISBN</label>
+						<input type="text" id="txtIsbn" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Yayınlanma Tarihi</label>
+						<input type="datetime-local" id="txtPublishDate" class="form-control txt">
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<a href="#" id="btnSave" class="btn btn-primary">Kaydet</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="modalAuthor" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTitleId">Yazar Ekle </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+
+					<div class="mb-3">
+						<label class="form-label">Yazar</label>
+						<select id="ddlAddAuthor" multiple="multiple" class="form-control select2">
+						</select>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<a href="#" id="btnAuthorSave" class="btn btn-primary">Kaydet</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal" id="modalPublisher" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTitleId">Yayınevi Ekle </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+
+					<div class="mb-3">
+						<label class="form-label">Yayınevi</label>
+						<select id="ddlAddPublisher" multiple="multiple" class="form-control select2">
+						</select>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<a href="#" id="btnPublisherSave" class="btn btn-primary">Kaydet</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts{
+
+
+	
+	<script>
+
+		//buraya yazılan komutlar, sayfda tamamen hazır olduktan sonra otomatik tetiklenen komutlardır.
+		//fillData();
+		var DataTable; // DataTable bir PLUG-IN dir
+		$(document).ready(function () { // Sayfa hazır olduğundan başla eventi
+
+			$("#btnSave").off();
+			$("#btnSave").click(function () {
+				// önce içerisinde yazarlar olmayan yeni bir kitabın json objesini oluşturuyoruz
+				let book = {
+					name: $("#txtName").val(),
+					description: $("#txtDescription").val(),
+					isbn: $("#txtIsbn").val(),
+					price: $("#txtPrice").val(),
+					totalPages: $("#txtTotalPages").val(),
+					publishDate: $("#txtPublishDate").val(),
+					categoryId: $("#ddlCategory option:selected").val(),
+
+				}
+				//controller tarafındaki authors isimli parametreye, bir author listesi göndermemiz gerekiyor.
+				//bunun için, önce boş bir authors dizisi oluşturuyoruz. Sonra içerisine, ddlAuthor'daki seçili olan tüm authorların id ve name bilgilerini kullanarak 2 field'a sahip author nesneleri oluşturup, array'in içerisine atıyoruz.
+				//Neden array kullanıyoruz ?
+				//Çünkü controller bizden List<Author> istiyor. Yani içerisinde birden fazla author objesi olan bir yapı göndermemiz gerekiyor.
+
+				let authors = [];
+				for (let item of $("#ddlAuthor option:selected")) {
+					console.log(item);
+					let x = {
+						id: item.value,
+						name: item.innerText
+					};
+					authors.push(x);
+					//console.log(yazarlar);
+				}
+
+				//sonra, bu göndermek istediğimiz verileri, Controller'ın parametre isimlerine uygun bir şekilde gönderebilmek için ayrı bir json nesnesi oluşturuyoruz. Çünkü controller, gelen requestteki objelerin İSİMLERİNE bakarak, onu kendi içerisinde parametrelere dağıtıyor.
+				let publishers = [];
+				for (let item of $("#ddlPublisher option:selected")) {
+					console.log(item);
+					let x = {
+						id: item.value,
+						name: item.innerText
+					};
+					publishers.push(x);
+				}
+
+				let veri = {
+					book: book,
+					authors: authors,
+					publishers: publishers
+				}
+
+
+				//Şimdi bizler aynı yöntemle, yayınevlerini de controller'a ve ilgili data nesnemize dahil edelim
+
+
+
+				$.ajax({
+					type: 'POST',
+					data: veri,
+					url: 'Book/Create',
+					success: function (res) {
+						$("#modal").modal('hide');
+						toastr.success("Kitap başarıyla eklendi");
+						DataTable.ajax.reload();
+					}
+				});
+
+			});
+
+
+			//$('.select2').select2({ width: '100%', dropdownParent: $('#modal') }); // İster burda istersek istersek function içine fillDdlCategory() nin altınada koyabiliriz.
+
+			$("#btnEkle").click(function () {
+				$("#modalTitleId").text("Kitap Ekle");
+				$(".txt").val("");
+				$("#modal").modal('show');
+				fillDdlCategory();
+				fillDdlAuthor("ddlAuthor");
+				fillDdlPublisher();
+
+				$('.select2').select2({ width: '100%', dropdownParent: $('#modal') });
+			});
+
+			fillDataTable();
+
+
+		});
+
+		function fillDdlCategory() {
+			// DTO (data transfer object) işlemi yapıcaz.
+			$.ajax({
+				type: 'Get',
+				url: '/Category/GetAll',
+				success: function (res) {
+					$("#ddlCategory").empty();
+					for (var item of res.data) {
+						//$("#ddlCategory").append(`<option value="${item.id}">${item.name}</option>`) // bunun yerine altakini yapmak daha profesyonel oluyor.
+						$("#ddlCategory").append(new Option(item.name, item.id));
+					}
+				}
+			});
+		}
+
+		function fillDdlAuthor(ddlName) {
+			// DTO (data transfer object) işlemi yapıcaz.
+			$.ajax({
+				type: 'Get',
+				url: '/Author/GetAll',
+				success: function (res) {
+					$("#" + ddlName).empty();
+					for (var item of res.data) {
+						//$("#ddlCategory").append(`<option value="${item.id}">${item.name}</option>`) // bunun yerine altakini yapmak daha profesyonel oluyor.
+						$("#" + ddlName).append(new Option(item.name, item.id));
+					}
+				}
+			});
+		}
+
+		function fillDdlPublisher() {
+			// DTO (data transfer object) işlemi yapıcaz.
+			$.ajax({
+				type: 'Get',
+				url: '/Publisher/GetAll',
+				success: function (res) {
+					$("#ddlPublisher").empty();
+					for (var item of res.data) {
+						$("#ddlPublisher").append(new Option(item.name, item.id));
+					}
+				}
+			});
+		}
+
+		function fillDataTable() {
+
+			DataTable = $('#tblBook').DataTable({
+				ajax: 'Book/GetAll', // burda Ajax sorgusu değil sanki url gibi ajax bilgisi veriyoruz.
+				columns: [
+					//{ data: 'id' },
+					{ data: 'name', title: 'İsim' },
+					{ data: 'description',title: 'Açıklama' },
+					{ data: 'isbn',title: 'ISBN' },
+					{ data: 'price',title: 'Fiyat' },
+					{ data: 'totalPages',title: 'Sayfa' },
+					{ data: 'category.name',title: 'Kategori' },
+					{
+						data: 'authors',title: 'Yazarlar', render: function (data, type, row) {
+							if (data.length == 0) {
+								return `<a href="#" onclick="addAuthorToBook('${row.id}')" class="btn btn-primary btn-sm">Yazar Ekle</a> `
+							}
+							else {
+								let yazarlar = "";
+								for (let x of data) {
+									//yazarlar += x.name + '</br>';
+									yazarlar += `${x.name} <a href = "#" onclick="removeAuthorFromBook('${x.id}','${row.id}')" class="bi bi-trash text-danger" > </a> </br >`;
+								}
+
+								return yazarlar;
+							}
+						}
+					},
+					{
+						data: 'publishers', title: 'Yayın Evleri', render: function (data, type, row) {
+
+							if (data.length == 0) {
+								return `<a href="#" onclick="addPublisherToBook('${row.id}')" class="btn btn-primary btn-sm">Yayınevi Ekle</a> `
+							}
+							else {
+								let yayınevleri = "";
+								for (let x of data) {
+									//yayınevleri += x.name + '</br>';
+									yayınevleri += `${x.name} <a href = "#" onclick="removePublisherFromBook('${x.id}','${row.id}')" class="bi bi-trash text-danger " > </a> </br >`;
+								}
+								return yayınevleri;
+
+							}
+
+						}
+					},
+					{
+						data: 'dateCreated', title: 'Oluşturulma Tarihi', render: function (data) {
+							return new Date(data).toLocaleDateString();
+						}
+					},
+					{
+					data: 'id', title: 'İşlemler', render: function (data) {
+							return `<a href="#" onclick="deleteBook('${data}')" class="btn btn-sm btn-danger">Sil</a> <a href="#" onclick="editBook('${data}')" class="btn btn-warning btn-sm">Düzenle</a> `
+						}
+					}
+
+				]
+
+			});
+		}
+
+
+		function removeAuthorFromBook(authorId, bookId) {
+			//console.log("Kitap ID : " + bookId);
+			//console.log("Yazar ID : " + authorId);
+
+			Swal.fire({
+				title: 'SİL', text: 'Silmek istediğinize emin misiniz?',
+				showCancelButton: true,
+				confirmButtonText: 'Evet',
+				cancelButtonText: 'Vazgeç'
+			}).then((result) => {
+				if (result.isConfirmed) {
+
+					$.ajax({
+						type: 'POST',
+						url: 'Book/RemoveAuthorFromBook',
+						data: {
+							authorId: authorId,
+							bookId: bookId
+						},
+						success: function (res) {
+							DataTable.ajax.reload();
+							toastr.success("İşlem Başarılı");
+						},
+						error: function () {
+							toastr.error("Hata Oluştu");
+						}
+					});
+				}
+				else if (result.isDenied) {
+					Swal.fire('Silme İşlemi İptal Edilmiştir.', '', 'info');
+				}
+			});
+
+
+			//$.ajax({
+
+			//    type:'POST',
+			//    url: 'Book/RemoveAuthorFromBook',
+			//    data:{
+			//        authorId: authorId,
+			//        bookId: bookId
+			//    },
+			//    success: function () {
+			//        DataTable.ajax.reload();
+			//        toastr.success("İşlem Başarılo");
+			//    }
+			//});
+
+		}
+
+
+		function removePublisherFromBook(publisherId, bookId) {
+			//console.log("Kitap ID : " + bookId);
+			//console.log("Yayınevi ID : " + publisherId);
+
+			Swal.fire({
+				title: 'SİL', text: 'Silmek istediğinize emin misiniz?',
+				showCancelButton: true,
+				confirmButtonText: 'Evet',
+				cancelButtonText: 'Vazgeç'
+			}).then((result) => {
+				if (result.isConfirmed) {
+
+					$.ajax({
+						type: 'POST',
+						url: 'Book/RemovePublisherFromBook',
+						data: {
+							publisherId: publisherId,
+							bookId: bookId
+						},
+						success: function (res) {
+							DataTable.ajax.reload();
+							toastr.success("İşlem Başarılı");
+						},
+						error: function () {
+							toastr.error("Hata Oluştu");
+						}
+					});
+				}
+				else if (result.isDenied) {
+					Swal.fire('Silme İşlemi İptal Edilmiştir.', '', 'info');
+				}
+			});
+		}
+
+
+
+		function editBook(id) {
+			// console.log("edit kategori tetiklendi : "+id);
+			$("#modalTitleId").text("Kitap Düzenle");
+			$("#btnSave").text("Güncelle").removeClass("btn-primary").addClass("btn-success");
+
+
+			$.ajax({
+				type: 'POST',
+				url: 'Book/GetById',
+				data: { id: id },
+				success: function (res) {
+					//console.log(res);
+					$("#txtName").val(res.name);
+					$("#txtDescription").val(res.description);
+					$("#txtIsbn").val(res.isbn);
+					$("#txtPrice").val(res.price);
+					$("#txtTotalPages").val(res.totalPages);
+					$("#txtCategory").val(res.categoryId);
+
+					$("#btnSave").off();
+					$("#btnSave").click(function () {
+						$.ajax({
+							type: 'POST',
+							url: 'Book/Update',
+							data: {
+								id: id,
+								name: $("#txtName").val(),
+								description: $("#txtDescription").val(),
+								isbn: $("#txtIsbn").val(),
+								price: $("#txtPrice").val(),
+								totalPages: $("#txtTotalPages").val(),
+								categoryId: $("#txtCategory").val()
+							},
+							success: function () {
+								$("#modal").modal('hide');
+								toastr.success("Başarıyla Güncellendi");
+								Swal.fire({
+
+									icon: 'success',
+									title: 'Güncelleme Başarıyla Gerçekleşti..',
+									showConfirmButton: false,
+									timer: 1500
+								})
+								DataTable.ajax.reload();
+							}
+
+						});
+
+					});
+
+					$("#modal").modal('show');
+				}
+
+			});
+
+
+		}
+
+		function addAuthorToBook(bookId) {
+			$("#modalAuthor").modal('show');
+			fillDdlAuthor("ddlAddAuthor");
+			$('.select2').select2({ width: '100%', dropdownParent: $('#modalAuthor') });
+
+			$("#btnAuthorSave").off().click(function () {
+
+				let yazarlar = [];
+				for (let item of $("#ddlAddAuthor option:selected")) {
+					//let x = {
+					//	id: item.value/*,*/
+					//	//name: item.innerText
+					yazarlar.push(item.value);
+
+					}
+					
+				
+				$.ajax({
+					type: 'POST',
+					url: 'Book/AddAuthorToBook',
+					data: {
+						bookId: bookId,
+						authors: yazarlar
+					},
+					success: function (res) {
+						$("#modalAuthor").modal('hide');
+						DataTable.ajax.reload();
+						toastr.success("İşlem Başarılı");
+					}
+				});
+
+			});
+
+		}
+
+		function addPublisherToBook(bookId) {
+			$("#modalPublisher").modal('show');
+			fillDdlPublisher("ddlAddPublisher");
+			$('.select2').select2({ width: '100%', dropdownParent: $('#modalPublisher') });
+
+			$("#btnPublisherSave").off().click(function () {
+
+				let yayınevleri = [];
+				for (let item of $("#ddlAddPublisher option:selected")) {
+					let x = {
+						id: item.value,
+						name: item.innerText
+					}
+					yayınevleri.push(x);
+				}
+				$.ajax({
+					type: 'POST',
+					url: 'Book/AddPublisherToBook',
+					data: {
+						bookId: bookId,
+						publishers: yayınevleri
+					},
+					success: function (res) {
+						$("#modalPublisher").modal('hide');
+						DataTable.ajax.reload();
+						toastr.success("İşlem Başarılı");
+					}
+				});
+
+			});
+		}
+
+		function deleteBook(id) {
+			Swal.fire({
+				title: 'SİL', text: 'Silmek istediğinize emin misiniz?',
+				icon: 'question',
+				showCancelButton: true,
+				confirmButtonText: 'Evet',
+				cancelButtonText: 'Vazgeç'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					let data = {
+						id: id
+					};
+					$.ajax({
+						type: 'DELETE',
+						url: 'Book/Delete',
+						data: data,
+						success: function () {
+							DataTable.ajax.reload();
+						},
+						error: function () {
+							toastr.error("Hata Oluştu");
+						}
+					});
+				}
+			});
+		}
+
+
+
+	</script>
+
+}
+

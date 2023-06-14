@@ -1,0 +1,23 @@
+﻿@*ajaxsız metod için*@
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "showDuration": "200"
+    }
+</script>
+
+@if (TempData["success"] != null)
+{
+    <script>
+
+        toastr.success('@TempData["success"]');
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        toastr.error('@TempData["error"]')
+    </script>
+}
